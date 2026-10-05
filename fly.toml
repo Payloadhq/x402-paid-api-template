@@ -1,0 +1,24 @@
+app = "x402-paid-api-template"
+primary_region = "iad"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[http_service]
+  internal_port = 3402
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "get"
+  path = "/api/health"
+  timeout = "5s"
+
+[env]
+  PORT = "3402"
+  X402_NETWORK = "base"
+  X402_ASSET = "USDC"
