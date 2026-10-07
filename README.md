@@ -2,8 +2,13 @@
 
 **Deploy your own paid API in minutes. By Payload.**
 
+This is the free, open-source template (MIT): a working Express server with
+paid x402 routes you can deploy and adapt.
+
 Every call to a priced endpoint costs USDC on Base, enforced by the
-[x402 protocol](https://www.x402.org/).
+[x402 protocol](https://www.x402.org/) — once the production facilitator is
+configured. Out of the box the template boots with a local HMAC dev verifier
+for testing, which accepts locally signed test payments only.
 
 [![Deploy to Fly.io](https://img.shields.io/badge/Deploy_to-Fly.io-8b5cf6)](https://fly.io/apps/new?template=https://github.com/Payloadhq/x402-paid-api-template)
 
@@ -39,7 +44,7 @@ fly secrets set PAY_TO=0xYourWalletAddress
 
 | Env var | Required | Default | What it does |
 |---|---|---|---|
-| `PAY_TO` | **yes** | none | Your wallet address that receives USDC |
+| `PAY_TO` | recommended | `0xYourReceivingWalletAddress` (placeholder) | Your wallet address that receives USDC. The server boots without it, but set it to receive real payments |
 | `X402_NETWORK` | no | `base` | `base` (mainnet) or `base-sepolia` (testnet) |
 | `X402_ASSET` | no | `USDC` | Payment asset |
 | `X402_DEV_SECRET` | dev only | `change-me-in-production` | Dev-mode verifier secret |
@@ -71,8 +76,9 @@ curl localhost:3402/api/joke -i   # 402 with payment instructions
 
 1. Client calls a priced endpoint → gets `402` + `PAYMENT-REQUIRED` details.
 2. Client pays USDC to `PAY_TO` on Base and retries with `PAYMENT-SIGNATURE`.
-3. Server verifies on-chain (or via facilitator), serves the response, records
-   it in `data/ledger.jsonl` (replay protection included).
+3. Server verifies the payment (dev verifier for local testing; facilitator
+   verifier for production), serves the response, records it in
+   `data/ledger.jsonl` (replay protection included).
 
 ## Keep it healthy, scale it up
 
@@ -83,8 +89,9 @@ curl localhost:3402/api/joke -i   # 402 with payment instructions
 - **Going to production at scale:** Veyline by Payload is the production layer
   for x402 + MCP: autonomous economic control for machine commerce.
 - **Learn the full pattern:** the
-  [Veyline Developer Primer](https://payloadtools.gumroad.com/) (formerly the
-  x402 Paid API Starter Kit, $79).
+  [Veyline Developer Primer](https://payloadtools.gumroad.com/l/x402-paid-api-starter-kit)
+  (formerly the x402 Paid API Starter Kit, $79) — the complete commercial
+  package this template's pattern is drawn from.
 
 Built by [Payload](https://payloadhq.github.io/).
 
