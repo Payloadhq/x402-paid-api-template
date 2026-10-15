@@ -10,6 +10,10 @@ Every call to a priced endpoint costs USDC on Base, enforced by the
 configured. Out of the box the template boots with a local HMAC dev verifier
 for testing, which accepts locally signed test payments only.
 
+**Get your own copy:** click **Use this template** at the top of this repo to
+create your own repository from this template, then deploy it one of the two
+ways below.
+
 [![Deploy to Fly.io](https://img.shields.io/badge/Deploy_to-Fly.io-8b5cf6)](https://fly.io/apps/new?template=https://github.com/Payloadhq/x402-paid-api-template)
 
 ## What you get
@@ -86,8 +90,12 @@ curl localhost:3402/api/joke -i   # 402 with payment instructions
   by Payload: free CLI + GitHub Action.
 - **When a 402 breaks in production:** callx402 by Payload — powered by Veyline
   diagnoses and rescues broken x402 calls. When x402 breaks, callx402.
-- **Going to production at scale:** Veyline by Payload is the production layer
-  for x402 + MCP: autonomous economic control for machine commerce.
+- **Going to production at scale:** [Veyline by Payload](https://payloadhq.github.io/veyline.html)
+  adds noncustodial authorization and spending governance for agent payments:
+  policy checks before a payment is authorized, and signed authorizations
+  scoped to an amount, a recipient, and an expiry. A free preflight evaluation
+  is available on the product page; production plans start with the Developer
+  subscription at $99 per month.
 - **Learn the full pattern:** the
   [Veyline Developer Primer](https://payloadtools.gumroad.com/l/x402-paid-api-starter-kit)
   (formerly the x402 Paid API Starter Kit, $79) — the complete commercial
